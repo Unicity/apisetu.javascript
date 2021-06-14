@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Api Setu Vaccination Details</title>
+    <title>Unicity Warehouse Application</title>
     <meta charset="UTF-8">
 
     <!-- Bootstrap -->
@@ -14,13 +14,13 @@
     <!-- Date picker UI -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css">
     <!-- Custom Theme Style -->
-    <link href="css/app.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/green.css" rel="stylesheet">
-    <link href="css/fileinput.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/viewer.css" rel="stylesheet">
-    <script src="script.js"></script>
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/green.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/fileinput.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/viewer.css') }}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -29,7 +29,11 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title">
-              <a href="https://www.unicity.com/ind/" class="site_title"><span>UNICITY</span></a>
+              @if (Auth::guest())
+              <li><a href="{{ url('/upppayments/create') }}" class="site_title"><span>UNICITY</span></a>
+              @else
+              <a href="{{ url('/warehouseorders') }}" class="site_title"><span>UNICITY</span></a>
+              @endif
             </div>
             <div class="clearfix"></div>
             <hr />
@@ -39,9 +43,11 @@
               <div class="menu_section">
                 <h3>&nbsp;</h3>
                 <ul class="nav side-menu">
-                  <li><a href="index.html" target="_blank"><i class="fa fa-user"></i>Vaccine Slots</a></li>
-                  <li><a href="https://www.unicity.com/ind/company/our-story/" target="_blank"><i class="fa fa-user"></i>About US</a></li>
-                  <li><a href="https://www.unicity.com/ind/contact/" target="_blank"><i class="fa fa-phone"></i>Contact US</a></li>
+                  <li><a href="{{ url('/upppayments/create') }}"><i class="fa fa-money"></i>Upp Payment</a></li>
+                  <li><a href="{{ url('https://www.unicity.com/ind/company/our-story/') }}" target="_blank"><i class="fa fa-user"></i>About US</a></li>
+                  <li><a href="{{ url('https://www.unicity.com/ind/contact/') }}" target="_blank"><i class="fa fa-phone"></i>Contact US</a></li>
+                  <li><a href="{{ url('https://www.unicity.com/ind/terms-of-use/') }}" target="_blank"><i class="fa fa-info"></i>Terms and Conditions</a></li>
+                  <li><a href="{{ url('/pdf/Policy-Procedure-May2019.pdf') }}" target="_blank"><i class="fa fa-lock"></i>Policies & Procedures</a></li>
                 </ul>
               </div>
             </div>
@@ -79,43 +85,7 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-            <div class="container-fluid">
-              <div class="d-flex justify-content-center">
-                  <div class="spinner-border"
-                       role="status" id="loading">
-                      <span class="sr-only">Loading...</span>
-                  </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <h1>India Api Setu Vaccination Details</h1>
-                  <form>
-                  <div class="form-group">
-                    <label for="sel1">Select States:</label>
-                    <div id="states"><select class="form-control" id="stateId"><option value="">Select State</option></select></div>
-                    <div style="color:red;display:none" id="stateErr"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="sel1">Select Districts:</label>
-                    <div id="districts"><select class="form-control" id="districtId"><option value="">Select District</option></select></div>
-                    <div style="color:red;display:none" id="distErr"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="sel1">Date:</label>
-                    <input id="datepicker" class="form-control" />
-                    <div style="color:red;display:none" id="dateErr"></div>
-                  </div>
-                  <button type="button" onclick="getSessionByDistId()" class="btn btn-primary" id="regbtn">Get Slots</button>
-                  <button type="reset" onclick="document.getElementById('sessions').style.display = 'none';" class="btn btn-default" id="regbtn">Clear</button>
-                  </form>
-                </div>
-
-                <div class="col-sm-12">
-                  <div class="form-group" id="sessions">
-                  </div>
-                </div>
-              </div>
-            </div>
+            @yield('content')
           </div>
         </div>
         <!-- /page content -->
@@ -143,12 +113,12 @@
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <!-- Custom Theme Scripts -->
     <!-- <script src="{{ asset('/js/custom.js') }}"></script>-->
-    <script src="js/custom.js"></script>
-    <script src="js/light.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/viewer.js"></script>
-    <script src="js/fileinput.js"></script>
-    <script src="js/green.css"></script>
+    <script src="{{ asset('/js/custom.js') }}"></script>
+    <script src="{{ asset('/js/light.js') }}"></script>
+    <script src="{{ asset('/js/main.js') }}"></script>
+    <script src="{{ asset('/js/viewer.js') }}"></script>
+    <script src="{{ asset('/js/fileinput.js') }}"></script>
+    <script src="{{ asset('/js/green.css') }}"></script>
 
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
      <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
