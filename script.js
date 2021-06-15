@@ -133,18 +133,17 @@ function showSessions(data) {
     let tab =
         `<h1>Vaccine Details:</h1>
         <div style="overflow-x:auto;">
-        <table class="table table-bordered">
-    <thead>
+        <table class="table table-bordered" style="background-color:white">
+    <thead style="background-color:#2a3f54; color:white">
       <tr>
-        <th>Center Id</th>
-        <th>Name</th>
-        <th>Vaccine</th>
-        <th>Available</th>
-        <th>Min Age Limit</th>
+        <th>Address</th>
+        <th>Vaccine Name</th>
+        <th>Dose Availability</th>
+        <th>Age</th>
         <th>Date</th>
-        <th>Fee | Fee Type</th>
-        <th>Slots</th>
-        <th>Book</th>
+        <th>Amount | Fee Type</th>
+        <th>Daily Time Slots</th>
+        <th>Slot Availability</th>
       </tr>
     </thead>
     <tbody>`;
@@ -157,23 +156,22 @@ function showSessions(data) {
             slots +=`<div style="width:125px">${s}</div>`;
           }
           tab += `<tr>
-                    <td>${r.center_id}</td>
-                    <td style="width:90px">
+                    <td>
                       <div><strong>Name:</strong> ${r.name}</div>
                       <div><strong>Block Name:</strong> ${r.block_name}</div>
                       <div><strong>Address:</strong> ${r.address}, ${r.state_name} - ${r.pincode}</div>
                     </td>
                     <td>${r.vaccine}</td>
-                    <td style="width:90px">
+                    <td style="width:110px">
                       <div><strong>Capacity:</strong> ${r.available_capacity}</div>
                       <div><strong>Dose1:</strong> ${r.available_capacity_dose1}</div>
                       <div><strong>Dose2:</strong> ${r.available_capacity_dose2}<div>
                     </td>
-                    <td>${r.min_age_limit}</td>
+                    <td style="width:55px">${r.min_age_limit==18?"18-44":(r.min_age_limit==45?"45+":r.min_age_limit)}</td>
                     <td><div style="width:80px">${r.date}</div></td>
                     <td><div style="width:80px">${r.fee} | ${r.fee_type}</div></td>
                     <td>${slots}</td>
-                    ${(r.available_capacity_dose1>0 || r.available_capacity_dose2>0)?"<td align='center' style='background-color:green;vertical-align:middle'><a style='color:white' target='_blank' href='https://selfregistration.cowin.gov.in'><strong>Book on CoWin</strong></a></td>":"<td>Not Available</td>"}
+                    ${(r.available_capacity_dose1>0 || r.available_capacity_dose2>0)?"<td align='center' style='background-color:#327ab7;vertical-align:middle'><a style='color:white' target='_blank' href='https://selfregistration.cowin.gov.in'><strong>Book on CoWin</strong></a></td>":"<td>Not Available</td>"}
                   </tr>`;
       }
     } else {
